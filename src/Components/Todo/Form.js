@@ -1,6 +1,7 @@
 import React from "react"
 import {connect} from "react-redux";
 import {add, clear} from '../actions/actions'
+import Axios from "axios";
 
 
 
@@ -16,12 +17,18 @@ class Form extends React.Component {
       this.setState({
          input: e.target.value,
       })
+
+      
    }
 
    addHandler = () => {
       this.props.add(this.state.input)
       this.setState({
          input: "",
+      })
+      Axios.post('')
+      .then(res => {
+         console.log(res)
       })
    }
 

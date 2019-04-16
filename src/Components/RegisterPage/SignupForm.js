@@ -2,21 +2,31 @@ import React from 'react';
 import './form.css'
 
 
+
 class SignupForm extends React.Component {
     constructor(props) {
         super(props);
-        this.sate ={
-            fullname: "",
-            email: "",
-            password: "",
-            passwordConfirmation: ""
+        this.state ={
+            newSignup: {
+                fullname: "",
+                email: "",
+                password: "",
+                passwordConfirmation: "",
+                errors: {},
+                isLoading: false
+            }
         }
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
     onChange(e) {
-        this.setState({[e.target.name]: e.target.value})
+        this.setState({
+            newSignup: {
+                ...this.state.newSignup,
+                [e.target.name]: e.target.value
+              }
+        })
     }
 
     onSubmit(e) {
@@ -24,16 +34,20 @@ class SignupForm extends React.Component {
         console.log(this.state);
 
     }
+
+    
     render() {
         return(
+            <div className="MainPage">
            
                 <form onSubmit={this.onSubmit}>
-
-                    <h1>Sign Up</h1>
+                    <div className="header">
+                        <h1>Welcome to Wunderlist 2.0 </h1>
+                    </div>
                     <div className="form-group">
 
                         <div className="input">
-                            <label className="control-label">Fullname</label>
+                            <label className="control-label">Full Name</label>
                             <input 
                             type="text"
                             name="fullname"
@@ -87,6 +101,7 @@ class SignupForm extends React.Component {
                     </div>
                     
                 </form>
+                </div>
             
         )
     }

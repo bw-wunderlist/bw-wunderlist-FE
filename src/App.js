@@ -12,11 +12,9 @@ const App = () => {
       <div className="App">
        
            <div> 
-              <Route exact path='/' component={Login} />
-             <Route path='/RegisterPage' component={RegisterPage} />
-             <Route path='/TodoApp' component={TodoApp} />
-             {/* <RegisterPage />
-             <TodoApp />     */}
+              <Route exact path='/' render={props => <Login {...props} /> }/>
+             <Route path='/register' render={props => <RegisterPage {...props} /> }/>
+             <Route path='/todo' render={props => <TodoApp {...props} /> } />
           </div>
          
       </div>
