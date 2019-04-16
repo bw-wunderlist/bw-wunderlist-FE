@@ -19,10 +19,14 @@ class Login extends React.Component {
     }
   }
   componentDidMount() {
-    this.state.cookies.set("_uid", "test");
+    this.state.cookies.set("_uid", "test", { expires: 1 });
     console.log(this.state.cookies.get('_uid'))
   }
 
+  componentWillUnmount(){
+    this.state.cookies.remove("_uid", "bye!", { path: '/' })
+    console.log((this.state.cookies.remove('_uid')))
+  }
 login = e => {
     e.preventDefault();
     axios
@@ -35,6 +39,16 @@ login = e => {
         this.props.history.push("/");
       })
       .catch(error => console.log(error));
+  };
+  logout = e => {
+    axios
+      .delete(``)
+      .then(res => {
+        this.setState({cookies: res.data});
+      })
+      .catch(error => {
+        console.error('Byeeee!', error);
+      });
   };
 
   // login = e => {
