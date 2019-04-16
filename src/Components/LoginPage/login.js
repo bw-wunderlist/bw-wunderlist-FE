@@ -1,5 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
+// import  RegisterPage   from '../RegisterPage/RegisterPage';
+
 
 class Login extends React.Component {
   state = {
@@ -36,6 +38,9 @@ class Login extends React.Component {
           />
           <button>Log in</button>
         </form>
+        <h3>Register for a account </h3>
+        
+        <Link to= "../RegisterPage/RegisterPage" >Rigister</Link>
       </div>
     );
   }
