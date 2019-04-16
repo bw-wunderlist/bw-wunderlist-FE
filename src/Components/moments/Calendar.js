@@ -16,7 +16,7 @@ class Calendar extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="calendar">
         <h1>Hello [cookies.name]</h1>
         <h2>Lets Get Things Done!</h2>
        
