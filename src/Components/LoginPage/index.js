@@ -11,3 +11,4 @@ export const login = credential => dispatch => {
     .then(res => console.log(res))
     .catch(err => console.log(err));
 };
+

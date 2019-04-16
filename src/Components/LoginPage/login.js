@@ -2,23 +2,32 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import './login.css'
 import axios from 'axios'
-import Cookies from 'js-cookies'
+import {withCookies} from 'react-cookie'
 
 class Login extends React.Component {
-  state = {
-    credentials: {
-      username: '',
-      password: ''
+  constructor(props){
+    super(props)
+    console.log(props)
+    this.state = {
+
+    cookies: props.cookies,
+      credentials: {
+        username: '',
+        password: ''
+      }
+      
     }
   }
-  componentDidMount(){Cookies.set('_uit', 'token', { expires: 1 })}
+  componentDidMount() {
+    this.state.cookies.set("_uid", "test");
+    console.log(this.state.cookies.get('_uid'))
+  }
 
-  login = e => {
+login = e => {
     e.preventDefault();
     axios
       .post(" ", this.state)
       .then(res => {
-        Cookies.set('_uit', 'token', { expires: 1 });
         this.setState({
           username: "",
           password: ""
@@ -81,4 +90,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default withCookies(Login);
