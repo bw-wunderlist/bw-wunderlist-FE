@@ -1,0 +1,30 @@
+.nav{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 35px;
+    background: rgb(206, 133, 7);
+}
+h2{
+    font-size: 1.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #fff;
+    margin-top: 5px;
+}
+
+
+.logout{
+    font-size: 1.3rem;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 10px 15px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+
+.logout:hover{
+    color: #000;
+    border: 1px solid #000;
+}

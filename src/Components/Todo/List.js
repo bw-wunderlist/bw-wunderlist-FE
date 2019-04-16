@@ -2,14 +2,16 @@ import React from "react"
 import {connect} from "react-redux";
 import {toggle} from '../actions/actions'
 import Item from '../Todo/Item';
+import './Todo.css'
 
 
 const List = (props) => {
    
    return(
-      <div>
+      <div className="listItem">
          {props.todos.map(todo =>
             <Item 
+               
                key={todo.id}
                todo={todo}
                id={todo.id}

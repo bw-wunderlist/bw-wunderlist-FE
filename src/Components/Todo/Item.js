@@ -7,7 +7,7 @@ const Task = styled.ul`
 const Item = (props) => {
    return(
       <div>
-         <Task onClick={props.toggle} complete={props.completed}>{props.todo.task}</Task>
+         <Task className="newItem" onClick={props.toggle} complete={props.completed}>{props.todo.task}</Task>
       </div>
    )
 }

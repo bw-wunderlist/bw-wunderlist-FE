@@ -2,6 +2,7 @@ import React from "react"
 import {connect} from "react-redux";
 import {add, clear} from '../actions/actions'
 import Axios from "axios";
+import './Todo.css'
 
 
 
@@ -37,21 +38,25 @@ class Form extends React.Component {
    }
     render(){
       return(
-         <div>
-            <form onSubmit={(e) => e.preventDefault()}>
-               <input 
-                  value={this.state.input} 
-                  placeholder="Enter Todo"
-                  maxLength="50"
-                  onChange={this.inputHandler}
-                  onKeyDown={(event) => {
-                     if (event.keyCode === 13) {
-                        this.addHandler()
-                     }
-                  }} 
-               />
-               <button onClick={() => this.addHandler()}>Add</button>
-               <button onClick={() => this.clearCompleted()}>Clear Complete</button>
+         <div className="form-bg">
+            <form className="newform" onSubmit={(e) => e.preventDefault()}>
+            <div className="todo-bg">
+                  <input 
+                     value={this.state.input} 
+                     placeholder="Enter Todo"
+                     maxLength="50"
+                     onChange={this.inputHandler}
+                     onKeyDown={(event) => {
+                        if (event.keyCode === 13) {
+                           this.addHandler()
+                        }
+                     }} 
+                  />
+                  <div className="btn-b">
+                     <button className="btn2" onClick={() => this.addHandler()}>+</button>
+                     <button className="btn2" onClick={() => this.clearCompleted()}>-</button>
+                  </div>
+               </div>
             </form>
          </div>
       )
