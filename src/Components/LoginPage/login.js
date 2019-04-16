@@ -19,7 +19,7 @@ class Login extends React.Component {
     }
   }
   componentDidMount() {
-    this.state.cookies.set("_uid", "test", { expires: 1 });
+    this.state.cookies.set("_uid", "test");
     console.log(this.state.cookies.get('_uid'))
   }
 
