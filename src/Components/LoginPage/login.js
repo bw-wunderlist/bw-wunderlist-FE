@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import './login.css'
-
+import axios from 'axios'
+import Cookies from 'js-cookies'
 
 class Login extends React.Component {
   state = {
@@ -9,7 +10,38 @@ class Login extends React.Component {
       username: '',
       password: ''
     }
+  }
+  componentDidMount(){Cookies.set('_uit', 'token', { expires: 1 })}
+
+  login = e => {
+    e.preventDefault();
+    axios
+      .post(" ", this.state)
+      .then(res => {
+        Cookies.set('_uit', 'token', { expires: 1 });
+        this.setState({
+          username: "",
+          password: ""
+        });
+        this.props.history.push("/");
+      })
+      .catch(error => console.log(error));
   };
+
+  // login = e => {
+  //   e.preventDefault();
+  //   axios
+  //     .post('', this.state)
+  //     .then(res => {
+  //       localStorage.setItem("token", res.data.token);
+  //       this.setState({
+  //         username: "",
+  //         password: ""
+  //       });
+  //       this.props.history.push("/");
+  //     })
+  //     .catch(error => console.log(error));
+  // };
 
   handleChange = e => {
     this.setState({
