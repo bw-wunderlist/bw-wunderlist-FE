@@ -1,5 +1,6 @@
 import React from 'react';
 import './form.css'
+import { Link } from 'react-router-dom'
 
 
 
@@ -101,6 +102,9 @@ class SignupForm extends React.Component {
                     </div>
                     
                 </form>
+                <h3>Already have a account </h3>
+        
+                <Link className="link" to= "/" >Login</Link>
                 </div>
             
         )

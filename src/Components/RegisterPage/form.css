@@ -1,6 +1,6 @@
 
 .MainPage {
-    
+    margin-bottom: 20px;
 }
 
 form{
@@ -20,16 +20,19 @@ form{
 h1{
     font-size: 1.4rem;
     padding: 20px 0;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     text-transform: uppercase;
     font-weight: 800;
     color: #fff;
+    text-align: center;
     
     
 }
 .header{
     background: rgb(206, 133, 7);
     width: 100%;
+    margin-bottom: 20px;
+    margin-top: -20px;
 }
 
 
@@ -58,6 +61,7 @@ label{
     padding: 0 50px;
     font-size: 1.5rem;
     
+    
 
 
 }
@@ -76,4 +80,16 @@ label{
 .reg-btn:hover {
     background: #000;
     color: rgb(206, 133, 7);
+}
+
+.link{
+    text-decoration: none;
+    font-size: 1.3rem;
+    color: rgb(206, 133, 7);
+    cursor: pointer;
+
+}
+.link:hover {
+    
+    color: #000;
 }

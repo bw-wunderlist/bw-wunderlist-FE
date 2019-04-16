@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-// import  RegisterPage   from '../RegisterPage/RegisterPage';
+import './login.css'
 
 
 class Login extends React.Component {
@@ -24,6 +24,9 @@ class Login extends React.Component {
     return (
       <div>
         <form onSubmit={this.login}>
+          <div className="header">
+            <h1>Login to  Wunderlist 2.0 </h1>
+          </div>
           <input
             type="text"
             name="username"
@@ -40,7 +43,7 @@ class Login extends React.Component {
         </form>
         <h3>Register for a account </h3>
         
-        <Link to= "../RegisterPage/RegisterPage" >Rigister</Link>
+        <Link className="link" to= "/Register" >Register</Link>
       </div>
     );
   }
