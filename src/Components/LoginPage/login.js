@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import {  Link  } from 'react-router-dom'
 import './login.css'
 import axios from 'axios'
 import {withCookies} from 'react-cookie'
@@ -33,6 +33,7 @@ class Login extends React.Component {
   // }
 
 login = e => {
+
     e.preventDefault();
     axios
       .post("https://wunderlist2.herokuapp.com/api/auth/login", this.state.credentials)
@@ -52,11 +53,9 @@ login = e => {
       })
       .catch(error => console.log(error));
   };
-  logout = e => {
-    this.state.cookies.remove('_uid')
-    this.props.history.push('/login')
-    console.log("run")
-  };
+
+
+  
 
   // login = e => {
   //   e.preventDefault();

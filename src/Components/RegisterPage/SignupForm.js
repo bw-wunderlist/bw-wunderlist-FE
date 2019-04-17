@@ -1,6 +1,8 @@
 import React from 'react';
 import './form.css'
-import { Link } from 'react-router-dom'
+import {Link, withRouter } from 'react-router-dom'
+import axios from 'axios'
+import {withCookies} from 'react-cookie'
 
 
 
@@ -8,20 +10,47 @@ class SignupForm extends React.Component {
     constructor(props) {
         super(props);
         this.state ={
+            cookies: props.cookies,
             newSignup: {
-                fullname: "",
+                username: "",
                 email: "",
                 password: "",
-                passwordConfirmation: "",
-                errors: {},
-                isLoading: false
+                
+        
             }
         }
-        this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+        
     }
 
-    onChange(e) {
+
+
+    componentDidMount() {
+        let d = new Date();
+      d.setTime(d.getTime() + (1440*60*1000));
+        this.state.cookies.set("_uid", 'hello', {expires: d});
+        console.log(this.state.cookies.get('_uid'))
+      }
+
+    
+
+
+
+    SignupForm = e => {
+        e.preventDefault()
+        console.log('fired')
+        axios
+          .post("https://wunderlist2.herokuapp.com/api/auth/register", this.state.newSignup)
+          .then(res => {
+            console.log(res)
+
+            this.state.cookies.set('_uid', res.data.token)
+            this.props.history.push("/todo");
+          }).catch(error => {console.log(error)})
+      };
+    
+
+
+    onChange = e => {
         this.setState({
             newSignup: {
                 ...this.state.newSignup,
@@ -30,29 +59,25 @@ class SignupForm extends React.Component {
         })
     }
 
-    onSubmit(e) {
-        e.preventDefault();
-        console.log(this.state);
-
-    }
+    
 
     
     render() {
         return(
             <div className="MainPage">
            
-                <form onSubmit={this.onSubmit}>
+                <form onSubmit={() => this.SignupForm()}>
                     <div className="header">
                         <h1>Welcome to Wunderlist 2.0 </h1>
                     </div>
                     <div className="form-group">
 
                         <div className="input">
-                            <label className="control-label">Full Name</label>
+                            <label className="control-label">UserName</label>
                             <input 
                             type="text"
-                            name="fullname"
-                            value={this.fullname}
+                            name="username"
+                            value={this.username}
                             onChange={this.onChange}
                             className="form-control"
                             />
@@ -81,20 +106,9 @@ class SignupForm extends React.Component {
                             />
                         </div>
 
-                        <div className="input">
-                            <label className="control-label">Password Confirmation</label>
-                            <input 
-                            type="password"
-                            name="passwordConfirmation"
-                            onChange={this.onChange}
-                            value={this.passwordConfirmation}
-                            className="form-control"
-                            />
-                        </div>
-
                         <div className="form-btn">
 
-                        <button className="reg-btn">
+                        <button className="reg-btn" type='submit' onClick={this.SignupForm} >
                         Sign Up
                         </button>
 
@@ -111,4 +125,4 @@ class SignupForm extends React.Component {
     }
 }
 
-export default SignupForm;
+export default withCookies(SignupForm, withRouter);
