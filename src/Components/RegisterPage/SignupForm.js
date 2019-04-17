@@ -125,4 +125,4 @@ class SignupForm extends React.Component {
     }
 }
 
-export default withCookies(SignupForm, withRouter);
+export default withRouter(withCookies(SignupForm));

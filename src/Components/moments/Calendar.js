@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import TimePicker from "react-datetime-picker";
 
-import "./styles.css";
+
 
 class Calendar extends Component {
   state = {
@@ -29,5 +29,4 @@ class Calendar extends Component {
   }
 }
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<Calendar />, rootElement);
+export default Calendar;
