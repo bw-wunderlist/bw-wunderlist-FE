@@ -31,11 +31,8 @@ class Login extends React.Component {
     console.log(this.state.cookies.remove('_uid'))
   }
 
-<<<<<<< HEAD
-  login = e => {
-=======
 login = e => {
->>>>>>> 262950ee0bda68255729b0d6d2408d9b8edc5409
+
     e.preventDefault();
     axios
       .post("https://wunderlist2.herokuapp.com/api/auth/login", this.state.credentials)
