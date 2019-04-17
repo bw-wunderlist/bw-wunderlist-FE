@@ -1,8 +1,10 @@
 import React from "react"
-import {connect} from "react-redux";
-import {add, clear} from '../actions/actions'
-import Axios from "axios";
+//import {connect} from "react-redux";
+//import {add, clear} from '../actions/actions'
+import axios from "axios";
 import './Todo.css'
+import { withCookies } from "react-cookie";
+//import {withCookies} from 'react-cookie'
 
 
 
@@ -10,9 +12,35 @@ class Form extends React.Component {
    constructor(props){
       super(props)
       this.state = {
-         input: "",
+         cookies: props.cookies,
+         _uid:'',
+         input:'',
+         token: ''
       }
    }
+
+   // componentDidMount(){
+   //    axios
+   //    .post('https://wunderlist2.herokuapp.com//api/tasks', this.state.input)
+   //    .then(res=> {
+   //       this.setState({
+   //          input: res.data
+   //       })
+   //    })
+   //    .catch(err => console.log(err))
+
+   // }
+
+   // removeInput = id => {
+   //    axios
+   //    .delete('https://wunderlist2.herokuapp.com//api/tasks/{id}')
+   //    .then (res => {
+   //       this.setState({input: res.data});
+   //    })
+   //    .catch(error => {
+   //       console.error('no', error);
+   //    });
+   // };
 
    inputHandler = (e) => {
       this.setState({
@@ -22,25 +50,35 @@ class Form extends React.Component {
       
    }
 
-   addHandler = () => {
-      this.props.add(this.state.input)
+   addHandler = (e) => {
+      e.preventDefault()
+      //this.props.add(this.state.input)
       this.setState({
          input: "",
       })
-      Axios
-      .post('https://wunderlist2.herokuapp.com//api/tasks')
+      axios
+      .post('https://wunderlist2.herokuapp.com//api/tasks', this.state.input, {headers: this.state._uid})
       .then(res => {
       console.log(res)
+      console.log(this.state.cookies)
       this.setState({
       ...this.state,
          input:''
       })
-      this.state.set(res.data.authorization)
-      })
+      this.state.cookies.set('token', res.data.token)    
+     })
    }
 
    clearCompleted = () => {
       this.props.clear()
+      axios
+      .delete('https://wunderlist2.herokuapp.com//api/tasks/{id}')
+      .then (res => {
+         this.setState({input: res.data});
+      })
+      .catch(error => {
+         console.error('no', error);
+      });
    }
     render(){
       return(
@@ -59,8 +97,8 @@ class Form extends React.Component {
                      }} 
                   />
                   <div className="btn-b">
-                     <button className="btn2" onClick={() => this.addHandler()}>+</button>
-                     <button className="btn2" onClick={() => this.clearCompleted()}>-</button>
+                     <button className="btn2" onClick={(e) => this.addHandler(e)}>+</button>
+                     <button className="btn2" onClick={(e) => this.clearCompleted(e)}>-</button>
                   </div>
                </div>
             </form>
@@ -68,5 +106,5 @@ class Form extends React.Component {
       )
    }
 }
-
-export default connect(null, {add, clear})(Form) 
+export default withCookies(Form)
+//export default connect(null, {add, clear})(Form) 
