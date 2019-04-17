@@ -40,7 +40,7 @@ class TodoApp extends React.Component {
       <div>
         <NavBar />
         <Form />
-        <List todos={this.state.tasks} />
+        <List todos={this.state.tasks} getTasks={this.getTasks} />
       </div>
     );
   }

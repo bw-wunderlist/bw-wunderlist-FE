@@ -93,7 +93,7 @@ class Form extends React.Component {
     axios
       .delete("https://wunderlist2.herokuapp.com/api/tasks/{id}")
       .then(res => {
-        this.setState({ input: res.data });
+        console.log(res);
       })
       .catch(error => {
         console.error("no", error);
