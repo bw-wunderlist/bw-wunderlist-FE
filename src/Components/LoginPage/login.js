@@ -52,11 +52,7 @@ login = e => {
   };
 
 
-  logout = e => {
-    this.state.cookies.remove('_uid')
-    this.props.history.push('/login')
-    console.log("run")
-  };
+  
 
   // login = e => {
   //   e.preventDefault();
