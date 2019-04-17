@@ -4,6 +4,7 @@ import './login.css'
 import axios from 'axios'
 import {withCookies} from 'react-cookie'
 
+
 class Login extends React.Component {
   constructor(props){
     super(props)
@@ -19,14 +20,17 @@ class Login extends React.Component {
     }
   }
   componentDidMount() {
-    this.state.cookies.set("_uid", "test");
+    let d = new Date();
+  d.setTime(d.getTime() + (1440*60*1000));
+    this.state.cookies.set("_uid", "test", {expires: d});
     console.log(this.state.cookies.get('_uid'))
   }
 
-  componentWillUnmount(){
-    this.state.cookies.remove("_uid", "bye!", { path: '/' })
-    console.log((this.state.cookies.remove('_uid')))
+  componentWillUnmount() {
+    this.state.cookies.remove("_uid", "bye!");
+    console.log(this.state.cookies.remove('_uid'))
   }
+
 login = e => {
     e.preventDefault();
     axios
@@ -41,14 +45,9 @@ login = e => {
       .catch(error => console.log(error));
   };
   logout = e => {
-    axios
-      .delete(``)
-      .then(res => {
-        this.setState({cookies: res.data});
-      })
-      .catch(error => {
-        console.error('Byeeee!', error);
-      });
+    this.state.cookies.remove('_uid')
+    this.props.history.push('/login')
+    console.log("run")
   };
 
   // login = e => {
@@ -79,7 +78,7 @@ login = e => {
     return (
       <div>
         <form onSubmit={this.login}>
-          <div className="header">
+          <div className="header" onClick={this.logout}>
             <h1>Login to  Wunderlist 2.0 </h1>
           </div>
           <input
