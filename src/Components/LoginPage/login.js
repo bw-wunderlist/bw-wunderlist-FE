@@ -15,7 +15,8 @@ class Login extends React.Component {
       credentials: {
         username: '',
         password: ''
-      }
+      },
+      token:''
       
     }
   }
@@ -26,10 +27,10 @@ class Login extends React.Component {
     console.log(this.state.cookies.get('_uid'))
   }
 
-  componentWillUnmount() {
-    this.state.cookies.remove("_uid", "bye!");
-    console.log(this.state.cookies.remove('_uid'))
-  }
+  // componentWillUnmount() {
+  //   this.state.cookies.remove("_uid", "bye!");
+  //   console.log(this.state.cookies.remove('_uid'))
+  // }
 
 login = e => {
     e.preventDefault();
@@ -45,6 +46,8 @@ login = e => {
           }
         });
         this.state.cookies.set('_uid', res.data.token)
+        this.setState({token: res.data.token})
+        console.log(this.state.token)
         this.props.history.push("/todo");
       })
       .catch(error => console.log(error));
