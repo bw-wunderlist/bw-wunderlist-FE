@@ -6,7 +6,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       <Route
         {...rest}
         render={props => {
-          if (localStorage.getItem('token')) {
+          if (this.state.cookies.get('_uid')) {
             return <Component {...props} />;
           } else {
             // redirect to login

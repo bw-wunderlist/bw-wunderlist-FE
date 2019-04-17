@@ -1,15 +1,70 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import './login.css'
-
+import axios from 'axios'
+import {withCookies} from 'react-cookie'
 
 class Login extends React.Component {
-  state = {
-    credentials: {
-      username: '',
-      password: ''
+  constructor(props){
+    super(props)
+    console.log(props)
+    this.state = {
+
+    cookies: props.cookies,
+      credentials: {
+        username: '',
+        password: ''
+      }
+      
     }
+  }
+  componentDidMount() {
+    this.state.cookies.set("_uid", "test");
+    console.log(this.state.cookies.get('_uid'))
+  }
+
+  componentWillUnmount(){
+    this.state.cookies.remove("_uid", "bye!", { path: '/' })
+    console.log((this.state.cookies.remove('_uid')))
+  }
+login = e => {
+    e.preventDefault();
+    axios
+      .post("https://wunderlist2.herokuapp.com/api/auth/login", this.state)
+      .then(res => {
+        this.setState({
+          username: "",
+          password: ""
+        });
+        this.props.history.push("/");
+      })
+      .catch(error => console.log(error));
   };
+  logout = e => {
+    axios
+      .delete(`https://wunderlist2.herokuapp.com/api/auth/ `)
+      .then(res => {
+        this.setState({cookies: res.data});
+      })
+      .catch(error => {
+        console.error('Byeeee!', error);
+      });
+  };
+
+  // login = e => {
+  //   e.preventDefault();
+  //   axios
+  //     .post('', this.state)
+  //     .then(res => {
+  //       localStorage.setItem("token", res.data.token);
+  //       this.setState({
+  //         username: "",
+  //         password: ""
+  //       });
+  //       this.props.history.push("/");
+  //     })
+  //     .catch(error => console.log(error));
+  // };
 
   handleChange = e => {
     this.setState({
@@ -49,4 +104,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default withCookies(Login);

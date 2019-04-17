@@ -7,7 +7,8 @@ export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const login = credential => dispatch => {
   dispatch({ type: LOGIN_START });
   axios
-    .post('http://localhost:3000')
+    .post('https://wunderlist2.herokuapp.com//api/auth/login')
     .then(res => console.log(res))
     .catch(err => console.log(err));
 };
+

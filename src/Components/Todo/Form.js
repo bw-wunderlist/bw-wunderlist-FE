@@ -2,7 +2,8 @@ import React from "react"
 import {connect} from "react-redux";
 import {add, clear} from '../actions/actions'
 import Axios from "axios";
-import './Todo.css'
+import './Todo.css';
+// import Calendar from '../moments/Calendar'
 
 
 
@@ -56,8 +57,10 @@ class Form extends React.Component {
                      <button className="btn2" onClick={() => this.addHandler()}>+</button>
                      <button className="btn2" onClick={() => this.clearCompleted()}>-</button>
                   </div>
+                   
                </div>
             </form>
+            {/* <Calendar />  */}
          </div>
       )
    }
