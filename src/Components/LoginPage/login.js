@@ -34,13 +34,18 @@ class Login extends React.Component {
 login = e => {
     e.preventDefault();
     axios
-      .post(" ", this.state)
+      .post("https://wunderlist2.herokuapp.com/api/auth/login", this.state.credentials)
       .then(res => {
+        console.log(res)
         this.setState({
-          username: "",
-          password: ""
+          ...this.state,
+          credentials: {
+            username: '',
+            password: ''
+          }
         });
-        this.props.history.push("/");
+        this.state.cookies.set('_uid', res.data.token)
+        this.props.history.push("/todo");
       })
       .catch(error => console.log(error));
   };
