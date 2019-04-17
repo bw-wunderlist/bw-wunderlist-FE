@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import {  Link  } from 'react-router-dom'
 import './login.css'
 import axios from 'axios'
 import {withCookies} from 'react-cookie'
+
 
 class Login extends React.Component {
   constructor(props){
@@ -19,36 +20,41 @@ class Login extends React.Component {
     }
   }
   componentDidMount() {
-    this.state.cookies.set("_uid", "test");
+    let d = new Date();
+  d.setTime(d.getTime() + (1440*60*1000));
+    this.state.cookies.set("_uid", "test", {expires: d});
     console.log(this.state.cookies.get('_uid'))
   }
 
-  componentWillUnmount(){
-    this.state.cookies.remove("_uid", "bye!", { path: '/' })
-    console.log((this.state.cookies.remove('_uid')))
+  componentWillUnmount() {
+    this.state.cookies.remove("_uid", "bye!");
+    console.log(this.state.cookies.remove('_uid'))
   }
-login = e => {
+
+  login = e => {
     e.preventDefault();
     axios
-      .post("https://wunderlist2.herokuapp.com/api/auth/login", this.state)
+      .post("https://wunderlist2.herokuapp.com/api/auth/login", this.state.credentials)
       .then(res => {
+        console.log(res)
         this.setState({
-          username: "",
-          password: ""
+          ...this.state,
+          credentials: {
+            username: '',
+            password: ''
+          }
         });
-        this.props.history.push("/");
+        this.state.cookies.set('_uid', res.data.token)
+        this.props.history.push("/todo");
       })
       .catch(error => console.log(error));
   };
+
+
   logout = e => {
-    axios
-      .delete(`https://wunderlist2.herokuapp.com/api/auth/ `)
-      .then(res => {
-        this.setState({cookies: res.data});
-      })
-      .catch(error => {
-        console.error('Byeeee!', error);
-      });
+    this.state.cookies.remove('_uid')
+    this.props.history.push('/login')
+    console.log("run")
   };
 
   // login = e => {
@@ -79,7 +85,7 @@ login = e => {
     return (
       <div>
         <form onSubmit={this.login}>
-          <div className="header">
+          <div className="header" onClick={this.logout}>
             <h1>Login to  Wunderlist 2.0 </h1>
           </div>
           <input

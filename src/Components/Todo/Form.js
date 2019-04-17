@@ -2,8 +2,7 @@ import React from "react"
 import {connect} from "react-redux";
 import {add, clear} from '../actions/actions'
 import Axios from "axios";
-import './Todo.css';
-// import Calendar from '../moments/Calendar'
+import './Todo.css'
 
 
 
@@ -28,9 +27,15 @@ class Form extends React.Component {
       this.setState({
          input: "",
       })
-      Axios.post('')
+      Axios
+      .post('https://wunderlist2.herokuapp.com//api/tasks')
       .then(res => {
-         console.log(res)
+      console.log(res)
+      this.setState({
+      ...this.state,
+         input:''
+      })
+      this.state.set(res.data.authorization)
       })
    }
 
@@ -57,10 +62,8 @@ class Form extends React.Component {
                      <button className="btn2" onClick={() => this.addHandler()}>+</button>
                      <button className="btn2" onClick={() => this.clearCompleted()}>-</button>
                   </div>
-                   
                </div>
             </form>
-            {/* <Calendar />  */}
          </div>
       )
    }
