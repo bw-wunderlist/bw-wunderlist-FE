@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import reducer from '../src/Components/reducers/reducer.js';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { CookiesProvider} from 'react-cookie';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 

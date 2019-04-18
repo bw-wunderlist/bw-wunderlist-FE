@@ -1,20 +1,26 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Edit from "../src/Components/UserProfile/Edit";
 // import connect  from 'react-redux';
 
-import RegisterPage from "./Components/RegisterPage/RegisterPage";
+import SignUp from "./Components/RegisterPage/SignupForm";
 import Login from "./Components/LoginPage/login";
 import TodoApp from "./Components/Todo/TodoApp";
 
 const App = () => {
   return (
-    <div className="App">
+    <div>
       <div>
-        <Route exact path="/" render={props => <Login {...props} />} />
-        <Route path="/register" render={props => <RegisterPage {...props} />} />
-        <Route path="/todo" render={props => <TodoApp {...props} />} />
-        <Route path="/edit" render={props => <Edit {...props} />} />
+        <Switch>
+          <Route
+            exact
+            path="/register"
+            render={props => <SignUp {...props} />}
+          />
+          <Route exact path="/todo" render={props => <TodoApp {...props} />} />
+          <Route exact path="/edit" render={props => <Edit {...props} />} />
+          <Route path="/" render={props => <Login {...props} />} />
+        </Switch>
       </div>
     </div>
   );

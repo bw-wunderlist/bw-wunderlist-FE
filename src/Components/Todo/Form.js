@@ -101,19 +101,21 @@ class Form extends React.Component {
               onChange={this.inputHandler}
               name="desc"
             />
+            
+            <button type="submit">Create</button>
+            <p>Repeat Task</p>
             <input
               type="checkbox"
               name="repeat"
               checked={this.state.repeat}
               onChange={this.inputHandler}
             />
-            <p>Repeat Task</p>
+            <input type="number" placeholder="Repeat Range" name="" />
             <DateTime
               value={this.state.due_date}
               name="due_date"
               onChange={input => this.datePicker(input)}
             />
-            <button type="submit">Create</button>
           </div>
         </form>
       </div>

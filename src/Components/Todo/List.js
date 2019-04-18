@@ -1,25 +1,19 @@
 import React from "react";
 import Item from "../Todo/Item";
-import "./Todo.css";
+
+import { Row } from 'reactstrap'
 
 const List = props => {
-  console.log(props);
   return (
-    <div className="listItem">
+    <Row className="listItem">
       {props.todos.map(todo => (
         <Item
           key={todo.id}
-          name={todo.name}
-          id={todo.id}
-          desc={todo.desc}
-          repeat={todo.repeat}
-          is_complete={todo.is_complete}
-          due_date={todo.due_date}
-          repeat_condition={todo.repeat_condition}
+          todo={todo}
           getTasks={props.getTasks}
         />
       ))}
-    </div>
+    </Row>
   );
 };
 

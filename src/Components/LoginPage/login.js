@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./login.css";
 import axios from "axios";
 import { withCookies } from "react-cookie";
+
+import { Container, Row, Col, Input, Button } from "reactstrap";
+
+import Image from '../../assets/login.svg'
 
 class Login extends React.Component {
   constructor(props) {
@@ -13,15 +16,9 @@ class Login extends React.Component {
       credentials: {
         username: "",
         password: ""
-      },
-      token: ""
+      }
     };
   }
-  // componentDidMount() {
-  //   let d = new Date();
-  //   d.setTime(d.getTime() + 1440 * 60 * 1000);
-  //   this.state.cookies.set("_uid", "test", { expires: d });
-  // }
 
   login = e => {
     e.preventDefault();
@@ -45,21 +42,6 @@ class Login extends React.Component {
       .catch(error => console.log(error));
   };
 
-  // login = e => {
-  //   e.preventDefault();
-  //   axios
-  //     .post('', this.state)
-  //     .then(res => {
-  //       localStorage.setItem("token", res.data.token);
-  //       this.setState({
-  //         username: "",
-  //         password: ""
-  //       });
-  //       this.props.history.push("/");
-  //     })
-  //     .catch(error => console.log(error));
-  // };
-
   handleChange = e => {
     this.setState({
       credentials: {
@@ -71,31 +53,42 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.login}>
-          <div className="header" onClick={this.logout}>
-            <h1>Login to Wunderlist 2.0 </h1>
-          </div>
-          <input
-            type="text"
-            name="username"
-            value={this.state.credentials.username}
-            onChange={this.handleChange}
-          />
-          <input
-            type="password"
-            name="password"
-            value={this.state.credentials.password}
-            onChange={this.handleChange}
-          />
-          <button>Log in</button>
-        </form>
-        <h3>Register for a account </h3>
-
-        <Link className="link" to="/Register">
-          Register
-        </Link>
-      </div>
+      <Container>
+        <Row style={{ height: "100vh", alignItems: "center" }} className="text-center">
+          <Col xs={{order: 2, size: 12}} md="6">
+            <form onSubmit={this.login}>
+              <div onClick={this.logout}>
+                <h2>Login to</h2>
+                <h1>Wunderlist 2.0</h1>
+              </div>
+              <Input
+                type="text"
+                name="username"
+                placeholder="Username"
+                value={this.state.credentials.username}
+                onChange={this.handleChange}
+              />
+              <br />
+              <Input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={this.state.credentials.password}
+                onChange={this.handleChange}
+              />
+              <br />
+              <Button color="primary">Log in</Button>
+            </form>
+            <div>
+              <h3>Register for a account </h3>
+              <Link to="/Register">Register</Link>
+            </div>
+          </Col>
+          <Col xs={{order: 1, size: 12}} md="6">
+            <img src={Image} style={{width: '100%'}} />
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

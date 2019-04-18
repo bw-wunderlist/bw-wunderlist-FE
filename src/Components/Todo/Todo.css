@@ -1,9 +1,6 @@
-.listItem {
+/* .listItem {
   background: rgb(255, 255, 255);
   margin-top: 5%;
-  /* -webkit-box-shadow: 10px 10px 39px -21px rgba(0,0,0,0.2);
-    -moz-box-shadow: 10px 10px 39px -21px rgba(0,0,0,0.2);
-    box-shadow: 10px 10px 39px -21px rgba(0,0,0,0.2); */
   color: rgb(206, 133, 7);
   font-size: 1.8rem;
 }
@@ -20,8 +17,8 @@
 }
 
 .btn2 {
-  /* width: 40px;
-    height: 40px; */
+  width: 40px;
+    height: 40px;
   font-size: 2rem;
   padding: 8px 18px;
   margin: 0 10px;
@@ -38,4 +35,4 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+} */
