@@ -67,7 +67,7 @@ class NewTask extends Component {
     axios
       .post(`https://wunderlist2.herokuapp.com/api/tasks`, {
         ...this.state.task,
-        repeat: this.state.dueDateStatus ? this.state.task.due_date: false,
+        due_date: this.state.dueDateStatus ? this.state.task.due_date : 0,
         repeat_condition: this.state.repeat_condition
       })
       .then(res => {
@@ -112,7 +112,7 @@ class NewTask extends Component {
             </FormGroup>
             <FormGroup>
               <Input
-                value={this.state.desc}
+                value={this.state.task.desc}
                 placeholder="Description"
                 maxLength="50"
                 onChange={this.inputHandler}

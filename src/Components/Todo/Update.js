@@ -25,20 +25,20 @@ import {
 class UpdateTask extends Component {
   state = {
     modal: this.props.modal,
+    id: this.props.todo.id,
+    isLoading: false,
     task: {
-      name: "",
-      desc: "",
-      repeat: false,
-      due_date: moment()
-        .add(1, "day")
-        .unix()
+      name: this.props.todo.name,
+      desc: this.props.todo.desc,
+      repeat: this.props.todo.repeat,
+      due_date: this.props.todo.due_date
     },
     repeat_condition: {
-      number: 1,
-      timeframe: "Day",
-      occurrences: 0,
+      number: this.props.todo.repeat_condition.number || 0,
+      timeframe: this.props.todo.repeat_condition.timeframe || 0,
+      occurrences: this.props.todo.repeat_condition.occurrences || 0
     },
-    dueDateStatus: false,
+    dueDateStatus: true,
     printRepeat: "Day"
   };
 
@@ -62,12 +62,15 @@ class UpdateTask extends Component {
     });
   };
 
-  createTask = e => {
+  updateTask = e => {
     e.preventDefault();
+    this.setState({
+      ...this.state,
+      isLoading: true
+    });
     axios
-      .post(`https://wunderlist2.herokuapp.com/api/tasks`, {
+      .put(`https://wunderlist2.herokuapp.com/api/tasks/${this.state.id}`, {
         ...this.state.task,
-        repeat: this.state.dueDateStatus ? this.state.task.due_date: false,
         repeat_condition: this.state.repeat_condition
       })
       .then(res => {
@@ -81,7 +84,8 @@ class UpdateTask extends Component {
             due_date: null
           }
         });
-        this.props.newTask();
+        this.props.toggle();
+        this.props.getTasks();
       });
   };
 
@@ -112,7 +116,7 @@ class UpdateTask extends Component {
             </FormGroup>
             <FormGroup>
               <Input
-                value={this.state.desc}
+                value={this.state.task.desc}
                 placeholder="Description"
                 maxLength="50"
                 onChange={this.inputHandler}
@@ -218,7 +222,12 @@ class UpdateTask extends Component {
                     </FormGroup>
                   </Col>
                   <Col>
-                    <label>for {this.state.repeat_condition.occurrences > 0 ? `${this.state.repeat_condition.occurrences} times` : "unlimited"}</label>
+                    <label>
+                      for{" "}
+                      {this.state.repeat_condition.occurrences > 0
+                        ? `${this.state.repeat_condition.occurrences} times`
+                        : "unlimited"}
+                    </label>
                     <FormGroup>
                       <Input
                         type="number"
@@ -236,12 +245,18 @@ class UpdateTask extends Component {
           </form>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={this.createTask}>
-            Submit
-          </Button>{" "}
-          <Button color="secondary" onClick={this.props.toggle}>
-            Cancel
-          </Button>
+          {this.state.isLoading ? (
+            <h1>Is Loading</h1>
+          ) : (
+            <>
+              <Button color="primary" onClick={this.updateTask}>
+                Update
+              </Button>
+              <Button color="secondary" onClick={this.props.toggle}>
+                Cancel
+              </Button>
+            </>
+          )}
         </ModalFooter>
       </Modal>
     );

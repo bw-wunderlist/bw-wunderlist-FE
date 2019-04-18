@@ -105,7 +105,7 @@ class Login extends React.Component {
             </form>
             <div>
               <h3>Register for a account </h3>
-              <Link to="/Register">Register</Link>
+              <Link to="/register">Register</Link>
             </div>
           </Col>
           <Col xs={{ order: 1, size: 12 }} md={{ order: 2, size: 6 }}>

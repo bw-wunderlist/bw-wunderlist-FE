@@ -12,6 +12,7 @@ import { Container } from "reactstrap";
 class TodoApp extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props.cookies.cookies)
     this.state = {
       cookies: props.cookies,
       tasks: []
