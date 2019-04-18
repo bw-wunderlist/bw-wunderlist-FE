@@ -12,7 +12,7 @@ import {
   CardTitle,
   CardSubtitle,
   Button,
-  Row, 
+  Row,
 } from "reactstrap";
 
 const Item = ({
