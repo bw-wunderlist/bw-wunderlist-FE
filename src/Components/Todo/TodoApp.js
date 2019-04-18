@@ -17,6 +17,9 @@ class TodoApp extends React.Component {
       cookies: props.cookies,
       tasks: []
     };
+    axios.defaults.headers.common["Authorization"] = this.state.cookies.get(
+      "_uid"
+    );
   }
 
   componentWillMount() {
@@ -24,9 +27,6 @@ class TodoApp extends React.Component {
   }
 
   getTasks = () => {
-    axios.defaults.headers.common["Authorization"] = this.state.cookies.get(
-      "_uid"
-    );
     axios
       .get("https://wunderlist2.herokuapp.com/api/tasks")
       .then(res => {

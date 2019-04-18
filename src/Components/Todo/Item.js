@@ -16,13 +16,10 @@ import {
 } from "reactstrap";
 
 const Item = ({
-  todo: { id, name, due_date, occurred, is_complete, desc },
+  todo: { id, name, due_date, occurred, repeat, is_complete, desc },
   getTasks,
   cookies
 }) => {
-  axios.defaults.headers.common["Authorization"] = cookies.get(
-    "_uid"
-  );
   const removeTask = id => {
     console.log(id)
     axios
@@ -51,15 +48,15 @@ const Item = ({
   return (
     <Col md="4">
       {is_complete ? (
-        <Card body inverse color="success">
+        <Card inverse color="success">
           <CardBody>
             <h4>{name}</h4>
             <CardSubtitle>Due: {moment.unix(due_date).calendar()}</CardSubtitle>
             <CardText>{desc}</CardText>
-            <CardText>Completed {occurred} times</CardText>
+            {repeat ? <CardText>Completed {occurred} times</CardText> : null}
             {/* <Button onClick={() => removeTask(id)} color="danger">Delete</Button> */}
             <Button onClick={() => removeTask(id)} color="danger">Delete</Button>
-            <Button onClick={() => completeTask(id)} color="secondary">Complete</Button>
+            <Button onClick={() => completeTask(id)} color="secondary">Mark as uncomplete</Button>
           </CardBody>
         </Card>
       ) : (
@@ -68,11 +65,9 @@ const Item = ({
             <h4>{name}</h4>
             <CardSubtitle>Due: {moment.unix(due_date).calendar()}</CardSubtitle>
             <CardText>{desc}</CardText>
-            <CardText>Completed {occurred} times</CardText>
-            <Row>
+            {repeat ? <CardText>Completed {occurred} times</CardText> : null}
             <Button onClick={() => removeTask(id)} color="danger">Delete</Button>
-            <Button onClick={() => completeTask(id)} color="success">Complete</Button>
-            </Row>
+            <Button onClick={() => completeTask(id)} color="success">Mark as complete</Button>
           </CardBody>
         </Card>
       )}

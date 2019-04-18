@@ -7,7 +7,7 @@ import { withCookies } from "react-cookie";
 
 import DateTime from "react-datetime";
 
-import "./datetime.css";
+// import "./datetime.css";
 
 class Form extends React.Component {
   constructor(props) {
