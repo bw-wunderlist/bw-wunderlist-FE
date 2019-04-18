@@ -21,7 +21,7 @@ class SignupForm extends React.Component {
     };
   }
 
-  SignupForm = e => {
+  signupHandler = e => {
     e.preventDefault();
     axios
       .post(
@@ -54,7 +54,7 @@ class SignupForm extends React.Component {
           className="text-center"
         >
           <Col xs={{order: 2, size: 12}} md="6">
-            <form onSubmit={this.login}>
+            <form onSubmit={this.signupHandler}>
               <div onClick={this.logout}>
                 <h2>Login to</h2>
                 <h1>Wunderlist 2.0</h1>
