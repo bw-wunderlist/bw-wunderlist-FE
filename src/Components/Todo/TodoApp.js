@@ -2,7 +2,7 @@ import React from "react";
 import List from "../Todo/List";
 import Form from "../Todo/Form";
 import NavBar from "../Navbar/Navbar";
-import Edit from "../UserProfile/Edit";
+import Edit from "../UserProfile/edit";
 import { withCookies } from "react-cookie";
 import axios from "axios";
 import UserProfile from "../UserProfile/userProfile";

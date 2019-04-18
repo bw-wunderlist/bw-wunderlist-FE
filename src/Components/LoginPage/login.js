@@ -16,8 +16,9 @@ class Login extends React.Component {
       credentials: {
         username: "",
         password: ""
-      }
-    };
+},
+error: { status: false, message: "" }
+    }
   }
 
   login = e => {
@@ -39,7 +40,10 @@ class Login extends React.Component {
         this.state.cookies.set("_uid", res.data.token);
         this.props.history.push("/todo");
       })
-      .catch(error => console.log(error));
+.catch(err => {
+console.log( err )
+this.setState({ ...this.state, error: { status: true, message: 'Incorrect Info... please try again ; )' } })
+});
   };
 
   handleChange = e => {
@@ -56,9 +60,9 @@ class Login extends React.Component {
       <Container>
         <Row style={{ height: "100vh", alignItems: "center" }} className="text-center">
           <Col xs={{order: 2, size: 12}} md={{order: 1, size: 6}}>
-          <Alert color="danger">
-        This is a danger alert — check it out!
-      </Alert>
+              {this.state.error.status ? <Alert color="danger">
+                  {this.state.error.message}
+      </Alert> : null}
             <form onSubmit={this.login}>
               <div onClick={this.logout}>
                 <h2>Login to</h2>
