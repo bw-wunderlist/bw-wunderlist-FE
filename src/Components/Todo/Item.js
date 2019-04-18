@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { withCookies } from "react-cookie";
-import moment from 'moment'
+import moment from "moment";
 
 const Task = styled.ul`
   ${props => (props.complete ? `text-decoration: line-through` : null)}
@@ -17,6 +17,7 @@ class Item extends React.Component {
   }
 
   removeTask = id => {
+    console.log(id);
     axios.defaults.headers.common["Authorization"] = this.state.cookies.get(
       "_uid"
     );
