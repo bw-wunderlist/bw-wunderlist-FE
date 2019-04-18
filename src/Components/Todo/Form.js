@@ -5,6 +5,10 @@ import axios from "axios";
 import "./Todo.css";
 import { withCookies } from "react-cookie";
 
+import DateTime from "react-datetime";
+
+import "./datetime.css";
+
 class Form extends React.Component {
   constructor(props) {
     super(props);
@@ -14,34 +18,10 @@ class Form extends React.Component {
         name: "",
         desc: "",
         repeat: false,
-        is_complete: false,
-        due_date: ""
+        due_date: null
       }
     };
   }
-
-  // componentDidMount(){
-  //    axios
-  //    .post('https://wunderlist2.herokuapp.com//api/tasks', this.state.input)
-  //    .then(res=> {
-  //       this.setState({
-  //          input: res.data
-  //       })
-  //    })
-  //    .catch(err => console.log(err))
-
-  // }
-
-  // removeInput = id => {
-  //    axios
-  //    .delete('https://wunderlist2.herokuapp.com//api/tasks/{id}')
-  //    .then (res => {
-  //       this.setState({input: res.data});
-  //    })
-  //    .catch(error => {
-  //       console.error('no', error);
-  //    });
-  // };
 
   inputHandler = e => {
     this.setState({
@@ -55,23 +35,14 @@ class Form extends React.Component {
 
   addHandler = e => {
     e.preventDefault();
-    //this.props.add(this.state.input)
-    this.setState({
-      name: "",
-      desc: "",
-      repeat: false,
-      is_complete: false,
-      due_date: ""
-    });
-    console.log(this.state.cookies.get("_uid"));
     axios.defaults.headers.common["Authorization"] = this.state.cookies.get(
       "_uid"
     );
+    console.log(this.state.task);
     axios
-      .post("https://wunderlist2.herokuapp.com/api/tasks", this.state.task)
+      .post(`https://wunderlist2.herokuapp.com/api/tasks`, this.state.task)
       .then(res => {
         console.log(res);
-        console.log(this.state.cookies);
         this.setState({
           ...this.state,
           task: {
@@ -79,7 +50,7 @@ class Form extends React.Component {
             desc: "",
             repeat: false,
             is_complete: false,
-            due_date: ""
+            due_date: null
           }
         });
       });
@@ -99,10 +70,22 @@ class Form extends React.Component {
         console.error("no", error);
       });
   };
+
+  datePicker = input => {
+    console.log(input);
+    this.setState({
+      ...this.state,
+      task: {
+        ...this.state.task,
+        due_date: input
+      }
+    });
+  };
+
   render() {
     return (
       <div className="form-bg">
-        <form className="newform" onSubmit={e => e.preventDefault()}>
+        <form className="newform" onSubmit={e => this.addHandler(e)}>
           <div className="todo-bg">
             <input
               value={this.state.name}
@@ -110,11 +93,6 @@ class Form extends React.Component {
               maxLength="50"
               onChange={this.inputHandler}
               name="name"
-              // onKeyDown={(event) => {
-              //    if (event.keyCode === 13) {
-              //       this.addHandler()
-              //    }
-              // }}
             />
             <input
               value={this.state.desc}
@@ -124,34 +102,18 @@ class Form extends React.Component {
               name="desc"
             />
             <input
-              value={this.state.repeat}
-              placeholder="repeat"
-              maxLength="50"
-              onChange={this.inputHandler}
+              type="checkbox"
               name="repeat"
-            />
-            <input
-              value={this.state.is_complete}
-              placeholder="completed"
-              maxLength="50"
+              checked={this.state.repeat}
               onChange={this.inputHandler}
-              name="is_complete"
             />
-            <input
+            <p>Repeat Task</p>
+            <DateTime
               value={this.state.due_date}
-              placeholder="due"
-              maxLength="50"
-              onChange={this.inputHandler}
               name="due_date"
+              onChange={input => this.datePicker(input)}
             />
-            <div className="btn-b">
-              <button className="btn2" onClick={e => this.addHandler(e)}>
-                +
-              </button>
-              <button className="btn2" onClick={e => this.clearCompleted(e)}>
-                -
-              </button>
-            </div>
+            <button type="submit">Create</button>
           </div>
         </form>
       </div>
@@ -159,4 +121,3 @@ class Form extends React.Component {
   }
 }
 export default withCookies(Form);
-//export default connect(null, {add, clear})(Form)

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { withCookies } from "react-cookie";
+import moment from "moment";
 
 const Task = styled.ul`
   ${props => (props.complete ? `text-decoration: line-through` : null)}
@@ -16,6 +17,7 @@ class Item extends React.Component {
     };
   }
   removeTask = id => {
+    console.log(id);
     axios.defaults.headers.common["Authorization"] = this.state.cookies.get(
       "_uid"
     );
@@ -39,7 +41,7 @@ class Item extends React.Component {
           complete={this.props.completed}
         >
           <h4>{this.props.name}</h4>
-          <p>{this.props.due_date}</p>
+          <p>{moment.unix(this.props.due_date).calendar()}</p>
           <p>{this.props.desc}</p>
           {/* {props.repeat_condition} */}
           <p>{this.props.is_complete}</p>
