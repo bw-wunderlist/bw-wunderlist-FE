@@ -18,6 +18,7 @@ const List = props => {
           is_complete={todo.is_complete}
           due_date={todo.due_date}
           repeat_condition={todo.repeat_condition}
+          getTasks={props.getTasks}
         />
       ))}
     </div>
