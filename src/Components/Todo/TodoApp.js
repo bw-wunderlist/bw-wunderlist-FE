@@ -5,7 +5,7 @@ import NavBar from "../Navbar/Navbar";
 import Edit from '../UserProfile/Edit'
 import { withCookies } from "react-cookie";
 import axios from "axios";
-import UserProfile from '../UserProfile/UserProfile'
+import UserProfile from '../UserProfile/userProfile'
 import {Route} from 'react-router-dom';
 
 class TodoApp extends React.Component {

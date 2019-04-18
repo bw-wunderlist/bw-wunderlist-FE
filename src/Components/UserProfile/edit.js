@@ -3,28 +3,31 @@ import Navbar from "../Navbar/Navbar";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { withCookies } from "react-cookie";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class Edit extends React.Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       userdata: {
         username: "",
-        email: "",
         imageurl: ""
       }
     };
   }
 
-  newDaata = e => {
+  newData = e => {
     e.preventDefault();
     console.log("fired");
+
+    axios.defaults.headers.common["Authorization"] = this.state.cookies.get(
+      "_uid"
+    );
+
     axios
-      .put("https://wunderlist2.herokuapp.com/api/user/", this.state.userdata)
+      .put("https://wunderlist2.herokuapp.com/api/user/", this.state.userData)
       .then(res => {
         console.log(res);
-
         this.state.cookies.set("_uid", res.data.token);
         this.props.history.push("/todo");
       })
@@ -33,7 +36,7 @@ class Edit extends React.Component {
       });
   };
 
-  handleChange = e => {
+  onChange = e => {
     e.preventDefault();
     this.setState({
       userdata: {
@@ -41,7 +44,6 @@ class Edit extends React.Component {
         [e.target.name]: e.target.value
       }
     });
-    console.log(e);
   };
 
   render() {
@@ -52,24 +54,14 @@ class Edit extends React.Component {
 
         <img className="img-circle avatar" src={user.data.avatar} />
         <h2>Edit Profile</h2>
-        <form onSubmit={() => this.newData()}>
+
+        <form onSubmit={() => this.newdata()}>
           <div className="input">
             <label className="control-label">UserName</label>
             <input
               type="text"
               name="username"
               value={this.username}
-              onChange={this.onChange}
-              className="form-control"
-            />
-          </div>
-
-          <div className="input">
-            <label className="control-label">Email</label>
-            <input
-              type="text"
-              name="email"
-              value={this.email}
               onChange={this.onChange}
               className="form-control"
             />
@@ -86,9 +78,7 @@ class Edit extends React.Component {
             />
           </div>
 
-          <button type="submit" onClick={this.handleChange}>
-            Save
-          </button>
+          <button type="submit">Save</button>
         </form>
       </div>
     );
