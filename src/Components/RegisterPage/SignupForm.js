@@ -126,3 +126,4 @@ class SignupForm extends React.Component {
 }
 
 export default withRouter(withCookies(SignupForm));
+

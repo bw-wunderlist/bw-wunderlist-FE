@@ -4,6 +4,7 @@ import {Route} from 'react-router-dom';
 import  RegisterPage   from './Components/RegisterPage/RegisterPage';
 import Login from './Components/LoginPage/login'
 import  TodoApp from './Components/Todo/TodoApp'
+import Edit from './Components/UserProfile/Edit'
 import './App.css';
 
 
@@ -16,6 +17,7 @@ const App = () => {
               <Route exact path='/' render={props => <Login {...props} /> }/>
              <Route path='/register' render={props => <RegisterPage {...props} /> }/>
              <Route path='/todo' render={props => <TodoApp {...props} /> } />
+             
           </div>
          
       </div>

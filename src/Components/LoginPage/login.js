@@ -1,58 +1,57 @@
-import React from 'react';
-import {  Link  } from 'react-router-dom'
-import './login.css'
-import axios from 'axios'
-import {withCookies} from 'react-cookie'
-
+import React from "react";
+import { Link } from "react-router-dom";
+import "./login.css";
+import axios from "axios";
+import { withCookies } from "react-cookie";
 
 class Login extends React.Component {
-  constructor(props){
-    super(props)
-    console.log(props)
+  constructor(props) {
+    super(props);
+    console.log(props);
     this.state = {
-
-    cookies: props.cookies,
+      cookies: props.cookies,
       credentials: {
-        username: '',
-        password: ''
-      }
-      
-    }
+        username: "",
+        password: ""
+      },
+      token: ""
+    };
   }
   componentDidMount() {
     let d = new Date();
-  d.setTime(d.getTime() + (1440*60*1000));
-    this.state.cookies.set("_uid", "test", {expires: d});
-    console.log(this.state.cookies.get('_uid'))
+    d.setTime(d.getTime() + 1440 * 60 * 1000);
+    this.state.cookies.set("_uid", "test", { expires: d });
+    console.log(this.state.cookies.get("_uid"));
   }
 
-  componentWillUnmount() {
-    this.state.cookies.remove("_uid", "bye!");
-    console.log(this.state.cookies.remove('_uid'))
-  }
+  // componentWillUnmount() {
+  //   this.state.cookies.remove("_uid", "bye!");
+  //   console.log(this.state.cookies.remove('_uid'))
+  // }
 
-login = e => {
-
+  login = e => {
     e.preventDefault();
     axios
-      .post("https://wunderlist2.herokuapp.com/api/auth/login", this.state.credentials)
+      .post(
+        "https://wunderlist2.herokuapp.com/api/auth/login",
+        this.state.credentials
+      )
       .then(res => {
-        console.log(res)
+        console.log(res);
         this.setState({
           ...this.state,
           credentials: {
-            username: '',
-            password: ''
+            username: "",
+            password: ""
           }
         });
-        this.state.cookies.set('_uid', res.data.token)
+        this.state.cookies.set("_uid", res.data.token);
+        this.setState({ token: res.data.token });
+        console.log(this.state.token);
         this.props.history.push("/todo");
       })
       .catch(error => console.log(error));
   };
-
-
-  
 
   // login = e => {
   //   e.preventDefault();
@@ -83,7 +82,7 @@ login = e => {
       <div>
         <form onSubmit={this.login}>
           <div className="header" onClick={this.logout}>
-            <h1>Login to  Wunderlist 2.0 </h1>
+            <h1>Login to Wunderlist 2.0 </h1>
           </div>
           <input
             type="text"
@@ -100,8 +99,10 @@ login = e => {
           <button>Log in</button>
         </form>
         <h3>Register for a account </h3>
-        
-        <Link className="link" to= "/Register" >Register</Link>
+
+        <Link className="link" to="/Register">
+          Register
+        </Link>
       </div>
     );
   }

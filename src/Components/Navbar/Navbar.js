@@ -1,6 +1,6 @@
 import React from "react";
 import './NavBar.css'
-import { Link, withRouter } from "react-router-dom";
+import {Link} from 'react-router-dom';
 import {withCookies} from 'react-cookie'
 
 
@@ -15,31 +15,11 @@ class NavBar extends React.Component {
         }
 
 
-        componentDidMount() {
-            let d = new Date();
-          d.setTime(d.getTime() + (1440*60*1000));
-            this.state.cookies.set("_uid", "Logged Out", {expires: d});
-            console.log(this.state.cookies.get('_uid'))
-          }
-        
-          componentWillUnmount() {
-            this.state.cookies.remove("_uid", "bye!");
-            console.log(this.state.cookies.remove('_uid'))
-          }
-
-
-    handleChange =  e => {
-        e.preventDefault()
-
-        // await Auth.signOut();
-
-        this.userHasAuthenticated(false);
+    handleChange = () => {
         this.state.cookies.remove('_uid')
         this.props.history.push('/login')
         console.log("run")
       };
-
-
 
     render() {
         return(
@@ -52,4 +32,4 @@ class NavBar extends React.Component {
 }
 
 
-export default withRouter(withCookies(NavBar));
+export default withCookies(NavBar);
