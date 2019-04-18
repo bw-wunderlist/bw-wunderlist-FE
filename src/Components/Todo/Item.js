@@ -11,11 +11,11 @@ const Task = styled.ul`
 class Item extends React.Component {
   constructor(props) {
     super(props);
-    this.getTasks = props.getTasks;
     this.state = {
       cookies: props.cookies
     };
   }
+
   removeTask = id => {
     console.log(id);
     axios.defaults.headers.common["Authorization"] = this.state.cookies.get(
@@ -24,14 +24,13 @@ class Item extends React.Component {
     axios
       .delete(`https://wunderlist2.herokuapp.com/api/tasks/${this.props.id}`)
       .then(res => {
-        console.log(res);
-        console.log(this);
         this.getTasks();
       })
       .catch(error => {
         console.log(error);
       });
   };
+
   render() {
     return (
       <div>

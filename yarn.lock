@@ -2061,6 +2061,11 @@ binary-extensions@^1.0.0:
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-1.13.1.tgz#598afe54755b2868a5330d2aff9d4ebb53209b65"
   integrity sha512-Un7MIEDdUC5gNpcGDV97op1Ywk748MpHcFTHoYs6qnj1Z3j7I53VG3nwZhKzoBZmbdRNnb6WRdFlwl7tSDuZGw==
 
+blacklist@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/blacklist/-/blacklist-1.1.4.tgz#b2dd09d6177625b2caa69835a37b28995fa9a2f2"
+  integrity sha1-st0J1hd2JbLKppg1o3somV+povI=
+
 bluebird@^3.5.1, bluebird@^3.5.3:
   version "3.5.4"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.4.tgz#d6cc661595de30d5b3af5fcedd3c0b3ef6ec5714"
@@ -2490,7 +2495,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.3, classnames@^2.2.6:
+classnames@^2.2.3, classnames@^2.2.5, classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
   integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
@@ -2848,7 +2853,7 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-create-react-class@^15.5.2:
+create-react-class@^15.5.2, create-react-class@^15.6.2:
   version "15.6.3"
   resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.6.3.tgz#2d73237fb3f970ae6ebe011a9e66f46dbca80036"
   integrity sha512-M+/3Q6E6DLO6Yx3OwrWjwHBnvfXXYA7W+dFjt/ZDBemHO1DDZhsalX/NUtnTYclN6GfnBDRh4qRHjcDHmlJBJg==
@@ -8223,6 +8228,11 @@ property-information@^5.0.0, property-information@^5.0.1:
   dependencies:
     xtend "^4.0.1"
 
+proptypes@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/proptypes/-/proptypes-1.1.0.tgz#78b3828a5aa6bb1308939e0de3c6044dfd4bd239"
+  integrity sha1-eLOCilqmuxMIk54N48YETf1L0jk=
+
 proxy-addr@~2.0.4:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/proxy-addr/-/proxy-addr-2.0.5.tgz#34cbd64a2d81f4b1fd21e76f9f06c8a45299ee34"
@@ -8368,6 +8378,16 @@ raw-body@2.3.3:
     http-errors "1.6.3"
     iconv-lite "0.4.23"
     unpipe "1.0.0"
+
+rc-datetime-picker@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/rc-datetime-picker/-/rc-datetime-picker-1.6.1.tgz#c036cac364c08c01c123eadd9b830d28fccfb45e"
+  integrity sha1-wDbKw2TAjAHBI+rdm4MNKPzPtF4=
+  dependencies:
+    blacklist "^1.1.4"
+    classnames "^2.2.5"
+    create-react-class "^15.6.2"
+    react-slider "^0.9.0"
 
 rc@^1.2.7:
   version "1.2.8"
@@ -8679,6 +8699,11 @@ react-scripts@2.1.8:
     workbox-webpack-plugin "3.6.3"
   optionalDependencies:
     fsevents "1.2.4"
+
+react-slider@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/react-slider/-/react-slider-0.9.0.tgz#584ae63325be115581fc08bf7753adb8e4d4a0b1"
+  integrity sha512-xAcW33uW82317OcJw0vcpT2N949MqwNSy53CiuPwXOEx/g4BdFbOgfemlsueEd+3q7DvAAP/Kj8fiy+1rekfiA==
 
 react-time-picker@^3.4.0:
   version "3.5.1"
