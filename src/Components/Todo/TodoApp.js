@@ -43,7 +43,7 @@ class TodoApp extends React.Component {
   render() {
     return (
       <>
-        <NavBar />
+        <NavBar getTasks={this.getTasks} />
         <Container>
           {/* <UserProfile /> */}
           {/* <Form /> */}

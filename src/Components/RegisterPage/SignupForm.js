@@ -4,15 +4,16 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { withCookies } from "react-cookie";
 
-import { Container, Row, Col, Input, Button } from "reactstrap";
+import { Container, Row, Col, Input, Button, Spinner } from "reactstrap";
 
-import Register from '../../assets/authentication.svg'
+import Register from "../../assets/authentication.svg";
 
 class SignupForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       cookies: props.cookies,
+      isLoading: false,
       newSignup: {
         username: "",
         email: "",
@@ -23,6 +24,10 @@ class SignupForm extends React.Component {
 
   signupHandler = e => {
     e.preventDefault();
+    this.setState({
+      ...this.state,
+      isLoading: true,
+    })
     axios
       .post(
         "https://wunderlist2.herokuapp.com/api/auth/register",
@@ -53,7 +58,7 @@ class SignupForm extends React.Component {
           style={{ height: "100vh", alignItems: "center" }}
           className="text-center"
         >
-          <Col xs={{order: 2, size: 12}} md="6">
+          <Col xs={{ order: 2, size: 12 }} md="6">
             <form onSubmit={this.signupHandler}>
               <div onClick={this.logout}>
                 <h2>Login to</h2>
@@ -83,14 +88,18 @@ class SignupForm extends React.Component {
                 value={this.password}
               />
               <br />
-              <Button color="primary">Register</Button>
+              {this.state.isLoading ? (
+                <Spinner color="primary" />
+              ) : (
+                <Button color="primary">Register</Button>
+              )}
             </form>
             <div>
               <h3>Login to account </h3>
               <Link to="/">Login</Link>
             </div>
           </Col>
-          <Col xs={{order: 1, size: 12}} md="6">
+          <Col xs={{ order: 1, size: 12 }} md="6">
             <img src={Register} style={{ width: "100%" }} />
           </Col>
         </Row>

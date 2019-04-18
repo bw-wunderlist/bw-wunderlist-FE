@@ -24,6 +24,7 @@ class NavBar extends React.Component {
   };
 
   newTask = () => {
+    this.props.getTasks();
     this.toggleModal();
   };
 

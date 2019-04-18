@@ -98,7 +98,7 @@ class NewTask extends Component {
   render() {
     return (
       <Modal isOpen={this.props.modal} toggle={this.props.toggle}>
-        <ModalHeader toggle={this.props.toggle}>Create A Task</ModalHeader>
+        <ModalHeader toggle={this.props.toggle}>Update A Task</ModalHeader>
         <ModalBody>
           <form onSubmit={e => this.addHandler(e)}>
             <FormGroup>

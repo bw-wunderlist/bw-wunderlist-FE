@@ -3,16 +3,16 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { withCookies } from "react-cookie";
 
-import { Container, Row, Col, Input, Button, Alert } from "reactstrap";
+import { Container, Row, Col, Input, Button, Alert, Spinner } from "reactstrap";
 
-import Image from '../../assets/login.svg'
+import Image from "../../assets/login.svg";
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       cookies: props.cookies,
+      isLoading: false,
       credentials: {
         username: "",
         password: ""
@@ -22,13 +22,16 @@ class Login extends React.Component {
 
   login = e => {
     e.preventDefault();
+    this.setState({
+      ...this.state,
+      isLoading: true,
+    })
     axios
       .post(
         "https://wunderlist2.herokuapp.com/api/auth/login",
         this.state.credentials
       )
       .then(res => {
-        console.log(res);
         this.setState({
           ...this.state,
           credentials: {
@@ -54,11 +57,12 @@ class Login extends React.Component {
   render() {
     return (
       <Container>
-        <Row style={{ height: "100vh", alignItems: "center" }} className="text-center">
-          <Col xs={{order: 2, size: 12}} md={{order: 1, size: 6}}>
-          <Alert color="danger">
-        This is a danger alert — check it out!
-      </Alert>
+        <Row
+          style={{ height: "100vh", alignItems: "center" }}
+          className="text-center"
+        >
+          <Col xs={{ order: 2, size: 12 }} md={{ order: 1, size: 6 }}>
+            <Alert color="danger">This is a danger alert — check it out!</Alert>
             <form onSubmit={this.login}>
               <div onClick={this.logout}>
                 <h2>Login to</h2>
@@ -80,15 +84,19 @@ class Login extends React.Component {
                 onChange={this.handleChange}
               />
               <br />
-              <Button color="primary">Log in</Button>
+              {this.state.isLoading ? (
+                <Spinner color="primary" />
+              ) : (
+                <Button color="primary">Login</Button>
+              )}
             </form>
             <div>
               <h3>Register for a account </h3>
               <Link to="/Register">Register</Link>
             </div>
           </Col>
-          <Col xs={{order: 1, size: 12}} md={{order: 2, size: 6}}>
-            <img src={Image} style={{width: '100%'}} />
+          <Col xs={{ order: 1, size: 12 }} md={{ order: 2, size: 6 }}>
+            <img src={Image} style={{ width: "100%" }} />
           </Col>
         </Row>
       </Container>
