@@ -109,7 +109,7 @@ class Login extends React.Component {
             </div>
           </Col>
           <Col xs={{ order: 1, size: 12 }} md={{ order: 2, size: 6 }}>
-            <img src={Image} style={{ width: "100%" }} />
+            <img src={Image} alt="logimage" style={{ width: "100%" }} />
           </Col>
         </Row>
       </Container>

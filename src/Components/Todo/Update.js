@@ -15,11 +15,9 @@ import {
   ModalBody,
   ModalFooter,
   Input,
-  Label,
   FormGroup,
   Row,
-  Col,
-  Spinner
+  Col
 } from "reactstrap";
 
 class UpdateTask extends Component {

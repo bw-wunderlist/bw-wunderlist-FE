@@ -109,7 +109,7 @@ class SignupForm extends React.Component {
             </div>
           </Col>
           <Col xs={{ order: 1, size: 12 }} md="6">
-            <img src={Register} style={{ width: "100%" }} />
+            <img src={Register} alt="registerimge" style={{ width: "100%" }} />
           </Col>
         </Row>
       </Container>

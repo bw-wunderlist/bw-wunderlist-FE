@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import axios from "axios";
 import { withCookies } from "react-cookie";
 import moment from "moment";
@@ -9,10 +8,8 @@ import {
   Card,
   CardText,
   CardBody,
-  CardTitle,
   CardSubtitle,
-  Button,
-  Row
+  Button
 } from "reactstrap";
 
 import UpdateTask from "./Update";

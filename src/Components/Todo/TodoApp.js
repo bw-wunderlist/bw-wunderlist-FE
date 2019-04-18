@@ -1,18 +1,14 @@
 import React from "react";
 import List from "../Todo/List";
-import Form from "../Todo/Form";
 import NavBar from "../Navbar/Navbar";
 import { withCookies } from "react-cookie";
 import axios from "axios";
-import UserProfile from "../UserProfile/userProfile";
-import { Route } from "react-router-dom";
-
 import { Container } from "reactstrap";
 
 class TodoApp extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props.cookies.cookies)
+    console.log(props.cookies.cookies);
     this.state = {
       cookies: props.cookies,
       tasks: []

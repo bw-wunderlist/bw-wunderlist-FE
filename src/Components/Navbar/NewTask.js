@@ -15,11 +15,9 @@ import {
   ModalBody,
   ModalFooter,
   Input,
-  Label,
   FormGroup,
   Row,
-  Col,
-  Spinner
+  Col
 } from "reactstrap";
 
 class NewTask extends Component {
@@ -36,7 +34,7 @@ class NewTask extends Component {
     repeat_condition: {
       number: 1,
       timeframe: "Day",
-      occurrences: 0,
+      occurrences: 0
     },
     dueDateStatus: false,
     printRepeat: "Day"
@@ -218,7 +216,12 @@ class NewTask extends Component {
                     </FormGroup>
                   </Col>
                   <Col>
-                    <label>for {this.state.repeat_condition.occurrences > 0 ? `${this.state.repeat_condition.occurrences} times` : "unlimited"}</label>
+                    <label>
+                      for{" "}
+                      {this.state.repeat_condition.occurrences > 0
+                        ? `${this.state.repeat_condition.occurrences} times`
+                        : "unlimited"}
+                    </label>
                     <FormGroup>
                       <Input
                         type="number"
