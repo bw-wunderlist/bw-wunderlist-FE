@@ -17,16 +17,10 @@ class Login extends React.Component {
       token: ""
     };
   }
-  componentDidMount() {
-    let d = new Date();
-    d.setTime(d.getTime() + 1440 * 60 * 1000);
-    this.state.cookies.set("_uid", "test", { expires: d });
-    console.log(this.state.cookies.get("_uid"));
-  }
-
-  // componentWillUnmount() {
-  //   this.state.cookies.remove("_uid", "bye!");
-  //   console.log(this.state.cookies.remove('_uid'))
+  // componentDidMount() {
+  //   let d = new Date();
+  //   d.setTime(d.getTime() + 1440 * 60 * 1000);
+  //   this.state.cookies.set("_uid", "test", { expires: d });
   // }
 
   login = e => {
@@ -46,8 +40,6 @@ class Login extends React.Component {
           }
         });
         this.state.cookies.set("_uid", res.data.token);
-        this.setState({ token: res.data.token });
-        console.log(this.state.token);
         this.props.history.push("/todo");
       })
       .catch(error => console.log(error));

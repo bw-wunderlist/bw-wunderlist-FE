@@ -1,6 +1,4 @@
 import React from "react";
-// import { connect } from "react-redux";
-// import { toggle } from "../actions/actions";
 import Item from "../Todo/Item";
 import "./Todo.css";
 

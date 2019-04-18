@@ -57,7 +57,6 @@ class Form extends React.Component {
   };
 
   clearCompleted = () => {
-    this.props.clear();
     axios.defaults.headers.common["Authorization"] = this.state.cookies.get(
       "_uid"
     );
