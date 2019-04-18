@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { withCookies } from "react-cookie";
 
-import { Container, Row, Col, Input, Button, Alert } from "reactstrap";
+import { Container, Row, Col, Input, Button, Alert, Spinner } from "reactstrap";
 
 import Register from "../../assets/authentication.svg";
 
