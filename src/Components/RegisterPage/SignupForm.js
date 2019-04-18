@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { withCookies } from "react-cookie";
 
-import { Container, Row, Col, Input, Button, Spinner } from "reactstrap";
+import { Container, Row, Col, Input, Button, Alert } from "reactstrap";
 
 import Register from "../../assets/authentication.svg";
 
@@ -18,7 +18,8 @@ class SignupForm extends React.Component {
         username: "",
         email: "",
         password: ""
-      }
+},
+error: { status: false, message: '' }
     };
   }
 
@@ -38,7 +39,8 @@ class SignupForm extends React.Component {
         this.props.history.push("/todo");
       })
       .catch(error => {
-        console.log(error);
+console.log(error)
+this.setState({ ...this.state,  error: { status: true, message: 'Sorry but That name is taken.' }});
       });
   };
 
@@ -58,7 +60,8 @@ class SignupForm extends React.Component {
           style={{ height: "100vh", alignItems: "center" }}
           className="text-center"
         >
-          <Col xs={{ order: 2, size: 12 }} md="6">
+          <Col xs={{order: 2, size: 12}} md="6">
+              {this.state.error.status ? <Alert color='danger'> {this.state.error.message} </Alert> : null}
             <form onSubmit={this.signupHandler}>
               <div onClick={this.logout}>
                 <h2>Login to</h2>
