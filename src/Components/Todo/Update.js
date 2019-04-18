@@ -22,7 +22,7 @@ import {
   Spinner
 } from "reactstrap";
 
-class NewTask extends Component {
+class UpdateTask extends Component {
   state = {
     modal: this.props.modal,
     task: {
@@ -248,4 +248,4 @@ class NewTask extends Component {
   }
 }
 
-export default NewTask;
+export default UpdateTask;
