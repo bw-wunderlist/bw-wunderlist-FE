@@ -44,6 +44,10 @@ const Item = ({
         console.log(error);
       });
   }
+  
+  const editTask = id => {
+
+  }
 
   return (
     <Col md="4">
@@ -57,6 +61,7 @@ const Item = ({
             {/* <Button onClick={() => removeTask(id)} color="danger">Delete</Button> */}
             <Button onClick={() => removeTask(id)} color="danger">Delete</Button>
             <Button onClick={() => completeTask(id)} color="secondary">Mark as uncomplete</Button>
+            <Button onClick={() => editTask(id)} color="warning">Edit</Button>
           </CardBody>
         </Card>
       ) : (
@@ -68,6 +73,7 @@ const Item = ({
             {repeat ? <CardText>Completed {occurred} times</CardText> : null}
             <Button onClick={() => removeTask(id)} color="danger">Delete</Button>
             <Button onClick={() => completeTask(id)} color="success">Mark as complete</Button>
+            <Button onClick={() => editTask(id)} color="warning">Edit</Button>
           </CardBody>
         </Card>
       )}

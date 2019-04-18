@@ -47,6 +47,7 @@ class Login extends React.Component {
         console.log(err);
         this.setState({
           ...this.state,
+          isLoading: false,
           error: {
             status: true,
             message: "Incorrect Info... please try again ; )"
