@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import Edit from "../src/Components/UserProfile/edit.js";
+import Edit from "./src/Components/UserProfile/edit";
 // import connect  from 'react-redux';
 
 import SignUp from "./Components/RegisterPage/SignupForm";

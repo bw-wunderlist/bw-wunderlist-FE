@@ -5,7 +5,7 @@ import { withCookies } from "react-cookie";
 
 import { Container, Row, Col, Input, Button, Alert } from "reactstrap";
 
-import Image from "../../assets/login.svg";
+import Image from '../../assets/login.svg'
 
 class Login extends React.Component {
   constructor(props) {
@@ -16,8 +16,9 @@ class Login extends React.Component {
       credentials: {
         username: "",
         password: ""
-      }
-    };
+},
+error: { status: false, message: "" }
+    }
   }
 
   login = e => {
@@ -34,18 +35,14 @@ class Login extends React.Component {
           credentials: {
             username: "",
             password: ""
-          },
-          error: { status: false, message: "" }
+          }
         });
         this.state.cookies.set("_uid", res.data.token);
         this.props.history.push("/todo");
-      })
-      .catch(error => {
-        this.setState({
-          status: true,
-          message: "Sorry that information is incorrect... try again ; )"
-        });
-      });
+      }).catch(err => {
+console.log( err )
+this.setState({ ...this.state, error: { status: true, message: 'Incorrect Info... please try again ; )' } })
+});
   };
 
   handleChange = e => {
@@ -60,14 +57,11 @@ class Login extends React.Component {
   render() {
     return (
       <Container>
-        <Row
-          style={{ height: "100vh", alignItems: "center" }}
-          className="text-center"
-        >
-          <Col xs={{ order: 2, size: 12 }} md={{ order: 1, size: 6 }}>
-            {this.state.error.status ? (
-              <Alert color="danger">{this.state.error.message}</Alert>
-            ) : null}
+        <Row style={{ height: "100vh", alignItems: "center" }} className="text-center">
+          <Col xs={{order: 2, size: 12}} md={{order: 1, size: 6}}>
+              {this.state.error.status ? <Alert color="danger">
+                  {this.state.error.message}
+      </Alert> : null}
             <form onSubmit={this.login}>
               <div onClick={this.logout}>
                 <h2>Login to</h2>
@@ -96,8 +90,8 @@ class Login extends React.Component {
               <Link to="/Register">Register</Link>
             </div>
           </Col>
-          <Col xs={{ order: 1, size: 12 }} md={{ order: 2, size: 6 }}>
-            <img src={Image} style={{ width: "100%" }} />
+          <Col xs={{order: 1, size: 12}} md={{order: 2, size: 6}}>
+            <img src={Image} style={{width: '100%'}} />
           </Col>
         </Row>
       </Container>
