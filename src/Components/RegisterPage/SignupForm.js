@@ -29,7 +29,7 @@ class SignupForm extends React.Component {
       d.setTime(d.getTime() + (1440*60*1000));
         this.state.cookies.set("_uid", 'hello', {expires: d});
         console.log(this.state.cookies.get('_uid'))
-      }
+    }
 
     
 

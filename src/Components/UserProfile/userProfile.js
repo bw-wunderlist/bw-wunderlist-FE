@@ -1,18 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import axios from 'axios'
+import {withCookies} from 'react-cookie'
+import {withRouter} from 'react-router-dom'
 
 class UserProfile extends React.Component {
     constructor(props) {
-        super()
+        super(props)
         this.state= {
-            userdata: {
+            cookies: props.cookies,
+            getData: {
                 username: '',
                 email: '',
                 imageurl: ''
             }
         }
     }
+
+
+
+    getData = e => {
+        e.preventDefault()
+        console.log('fired')
+
+        axios.defaults.headers.common["Authorization"] = this.state.cookies.get(
+            "_uid"
+          );
+
+        //   axios.delete("https://wunderlist2.herokuapp.com/api/user/", this.state.getData)
+
+        axios
+          .get("https://wunderlist2.herokuapp.com/api/user/", this.state.getData)
+          .then(res => {
+            console.log(res)
+            this.state.cookies.set('_uid', res.data.token)
+            this.props.history.push("/todo");
+          }).catch(error => {console.log(error)})
+    };
+
+
 
   render() {
     const { user } = this.props;
@@ -29,9 +56,8 @@ class UserProfile extends React.Component {
           <div className="card-text">
             <p>You have permission to perform the following:</p>
             <ul className="permissions">
-              <li>Edit UserName</li>
-              <li>Edit Email</li>
-              <li>Edit Password</li>
+              <li>{this.state.getData.username}</li>
+              <li>{this.state.getData.username}</li>
               <li>Delete Your Account</li>
             </ul>
           </div>
@@ -59,4 +85,4 @@ UserProfile.defaultProps = {
   }
 };
 
-export default UserProfile;
+export default withRouter(withCookies(UserProfile));

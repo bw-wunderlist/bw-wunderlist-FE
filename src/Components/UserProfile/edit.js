@@ -9,13 +9,25 @@ import {withRouter} from 'react-router-dom'
 class Edit extends React.Component{
     constructor(props) {
         super(props)
+        
         this.state= {
+            cookies: props.cookies,
             userdata: {
                 username: '',
                 imageurl: ''
             }
         }
     }
+
+
+
+    componentDidMount() {
+        let d = new Date();
+      d.setTime(d.getTime() + (1440*60*1000));
+        this.state.cookies.set("_uid", 'updated', {expires: d});
+        console.log(this.state.cookies.get('_uid'))
+      }
+
 
 
 
@@ -49,6 +61,8 @@ onChange = e => {
   };
 
 
+
+
     render(){
         const { user } = this.props;
         return(
@@ -60,7 +74,7 @@ onChange = e => {
                 src={user.data.avatar} />
                 <h2>Edit Profile</h2>
 
-                <form onSubmit={() => this.newdata()}>
+                <form onSubmit={() => this.newData()}>
 
                     <div className="input">
                             <label className="control-label">UserName</label>
@@ -84,7 +98,7 @@ onChange = e => {
                             />
                     </div>
 
-                    <button type='submit'>Save</button>
+                    <button type='submit' onClick={this.newData}>Save</button>
 
                 </form>
             </div>
