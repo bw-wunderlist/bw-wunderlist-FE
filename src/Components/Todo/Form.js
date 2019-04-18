@@ -5,9 +5,9 @@ import axios from "axios";
 import "./Todo.css";
 import { withCookies } from "react-cookie";
 
-import DateTime from 'react-datetime'
+import DateTime from "react-datetime";
 
-import "./datetime.css"
+import "./datetime.css";
 
 class Form extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class Form extends React.Component {
         name: "",
         desc: "",
         repeat: false,
-        due_date: null,
+        due_date: null
       }
     };
   }
@@ -38,7 +38,7 @@ class Form extends React.Component {
     axios.defaults.headers.common["Authorization"] = this.state.cookies.get(
       "_uid"
     );
-    console.log(this.state.task)
+    console.log(this.state.task);
     axios
       .post(`https://wunderlist2.herokuapp.com/api/tasks`, this.state.task)
       .then(res => {
@@ -50,13 +50,14 @@ class Form extends React.Component {
             desc: "",
             repeat: false,
             is_complete: false,
-            due_date: null,
+            due_date: null
           }
         });
       });
   };
 
   clearCompleted = () => {
+    this.props.clear();
     axios.defaults.headers.common["Authorization"] = this.state.cookies.get(
       "_uid"
     );
@@ -71,15 +72,15 @@ class Form extends React.Component {
   };
 
   datePicker = input => {
-    console.log(input)
+    console.log(input);
     this.setState({
       ...this.state,
       task: {
         ...this.state.task,
-        due_date: input,
+        due_date: input
       }
-    })
-  }
+    });
+  };
 
   render() {
     return (
@@ -100,8 +101,18 @@ class Form extends React.Component {
               onChange={this.inputHandler}
               name="desc"
             />
-            <input type="checkbox" name="repeat" checked={this.state.repeat} onChange={this.inputHandler} /><p>Repeat Task</p>
-            <DateTime value={this.state.due_date} name="due_date" onChange={(input) => this.datePicker(input)} />
+            <input
+              type="checkbox"
+              name="repeat"
+              checked={this.state.repeat}
+              onChange={this.inputHandler}
+            />
+            <p>Repeat Task</p>
+            <DateTime
+              value={this.state.due_date}
+              name="due_date"
+              onChange={input => this.datePicker(input)}
+            />
             <button type="submit">Create</button>
           </div>
         </form>

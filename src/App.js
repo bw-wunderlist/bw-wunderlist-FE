@@ -1,6 +1,7 @@
-import React from 'react';
-import {Route} from 'react-router-dom';
+import React from "react";
+import { Route } from "react-router-dom";
 // import connect  from 'react-redux';
+
 import  RegisterPage   from './Components/RegisterPage/RegisterPage';
 import Login from './Components/LoginPage/login'
 import  TodoApp from './Components/Todo/TodoApp'
@@ -21,9 +22,10 @@ const App = () => {
              <Route path='/edit' render={props => <Edit {...props} />} />
           </div>
          
+
       </div>
-    );
-  
-}
+    </div>
+  );
+};
 
 export default App;
