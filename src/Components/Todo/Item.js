@@ -24,7 +24,7 @@ class Item extends React.Component {
     axios
       .delete(`https://wunderlist2.herokuapp.com/api/tasks/${this.props.id}`)
       .then(res => {
-        this.getTasks();
+        this.props.getTasks();
       })
       .catch(error => {
         console.log(error);
